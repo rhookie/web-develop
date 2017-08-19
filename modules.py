@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime 
-
+print 'So cool'
 
 class PasteFile:
     __tablename__="PasteFile"
