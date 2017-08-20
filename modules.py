@@ -49,4 +49,13 @@ class PasteFile:
         id=short_url.decode_url(symlink)
         return cls.objdects.get_or_404(id=id)
     
+    @property 
+    def path(self):
+        return get_file_path(self.filehash)
+    
+    @property
+    def get_url(self,subtype,is_symlink=False):
+        hash_or_link=self.symlink if is_symlink else self.filehash
+        return 'http://{host}/{subtype}/{hash_or_link}'.format(subtype=subtype,host=request.host,hash_or_link=hash_or_link)
+    
         
