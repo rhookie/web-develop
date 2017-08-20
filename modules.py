@@ -44,5 +44,9 @@ class PasteFile:
         _,_,suffix=filename.rpartition('.')
         return '%s.%s'%(uuid.uuid4().hex,suffix)
     
+    @classmethod
+    def get_by_symlink(cls,symlink,code=404):
+        id=short_url.decode_url(symlink)
+        return cls.objdects.get_or_404(id=id)
     
         
