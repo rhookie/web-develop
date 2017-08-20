@@ -3,6 +3,8 @@ from datetime import datetime
 import cropresize2
 from PIL import Image 
 import os 
+from flask import abort 
+import uuid 
 
 class PasteFile:
     __tablename__="PasteFile"
@@ -16,7 +18,7 @@ class PasteFile:
         self.uploadtime=datetime.now()
         self.mimetype=mimetype 
         self.size=size 
-        self.filehash=filehash if filehash else self.hash_filename(filename)
+        self.filehash=filehash if filehash else self._hash_filename(filename)
         self.filemd5=filemd5 
     
     @classmethod
@@ -37,6 +39,10 @@ class PasteFile:
     def get_by_md5(cls,filemd5):
         return cls.query.filter_by(filemd5=filemd5).first() 
     
+    @staticmethod
+    def _hash_filename(filename):
+        _,_,suffix=filename.rpartition('.')
+        return '%s.%s'%(uuid.uuid4().hex,suffix)
     
     
         
