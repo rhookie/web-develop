@@ -57,7 +57,11 @@ class PasteFile:
     def get_url(self,subtype,is_symlink=False):
         hash_or_link=self.symlink if is_symlink else self.filehash
         return 'http://{host}/{subtype}/{hash_or_link}'.format(subtype=subtype,host=request.host,hash_or_link=hash_or_link)
-    
+
     @property
     def url_p(self):
         return self.get_url('p')
+    
+    @propery
+    def url_s(self):
+	return self.get_url('s',is_symlink=True)
