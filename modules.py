@@ -31,7 +31,7 @@ class PasteFile:
     
     @classmethod 
     def get_by_filehash(cls,filehash,code=404):
-        return cls.query.filter_by(filehash=filehash).first() or abort(code)
+        return cls.query.filter_by(filehash=filehash).first() or aborts(code)
     
     
     
